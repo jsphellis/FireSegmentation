@@ -3,16 +3,11 @@ import random
 from torch.utils.data import DataLoader
 import numpy as np
 import segmentation_models_pytorch as smp
-from sklearn.metrics import f1_score
 import torch.nn.functional as F
 from torch.nn import BCEWithLogitsLoss
-from pytorch_grad_cam import GradCAM
-from pytorch_grad_cam.utils.model_targets import ClassifierOutputTarget
 from dataset import FireSegmentationDataset
-from pytorch_grad_cam.utils.image import show_cam_on_image
 from torchvision import transforms
 from PIL import Image
-from torchvision.transforms.functional import to_pil_image
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 
@@ -101,7 +96,7 @@ class ModelEvaluator:
     # Evaluated model on testing set (loss and IoU)
     def evaluate_model_on_test(self, criterion):
         test_loader = DataLoader(self.dataset['test'], batch_size=32, shuffle=False, num_workers=4)
-        total_loss, total_iou = 0.0, 0.0, []
+        total_loss, total_iou = 0.0, 0.0
 
         for images, masks in test_loader:
             images, masks = images.to(self.device), masks.to(self.device)
