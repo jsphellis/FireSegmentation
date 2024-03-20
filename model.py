@@ -165,7 +165,7 @@ class UnetTrainer:
         plt.legend()
 
         plt.tight_layout()
-        plt.savefig('training_metrics.png')
+        plt.savefig('Visuals/training_metrics.png')
         plt.show()
 
 
