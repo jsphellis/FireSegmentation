@@ -28,7 +28,7 @@ class GradCam:
     def save_activations(self, act):
         self.activations = act
 
-    # 
+    # Captures activations with forward hook and gradients with backwards hook
     def register_hooks(self):
         self.target_layer.register_forward_hook(lambda module, input, output: self.save_activations(output))
         self.target_layer.register_full_backward_hook(lambda module, grad_in, grad_out: self.save_gradients(grad_out[0]))
